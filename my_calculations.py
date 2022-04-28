@@ -63,7 +63,7 @@ def minimize_functional(J, x_T, N):
     return minJ, x_T_opt
 
 
-def optimal_control(expm_transpose, t0, T, q_bar, M, any_signal):
+def optimal_control(expm_transpose, u_opt_func, t0, T, q_bar, M, update_pbar_signal):
     progress = 0
     total_calculations = M
     calculate_percent = lambda current, total: 85 + math.floor(current * 15 / total)
@@ -74,11 +74,12 @@ def optimal_control(expm_transpose, t0, T, q_bar, M, any_signal):
     for i in range(M):
         tmp = expm_transpose(T - t_g[i])
         psi[i] = tmp.dot(q_bar)
-        u[i] = np.sign(psi[i])
+
+        u[i] = u_opt_func(psi[i])
 
         progress = progress + 1
 
-        any_signal.emit(calculate_percent(progress, total_calculations))
+        update_pbar_signal.emit(calculate_percent(progress, total_calculations))
 
     return u
 
