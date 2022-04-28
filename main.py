@@ -5,10 +5,12 @@ import numpy as np
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import pyqtSignal, QThread, Qt
 from PyQt5.QtGui import QCursor, QDoubleValidator, QIntValidator
+from PyQt5.QtWidgets import QMessageBox, QDialog
 from numpy import double
 from scipy import linalg
 
-import test
+import design
+import help
 from my_calculations import covered_reachability_set, minimize_functional, optimal_control, euler_solve
 
 
@@ -32,59 +34,137 @@ class ThreadClass(QThread):
         self.terminate()
 
 
-class App(QtWidgets.QMainWindow, test.Ui_MainWindow):
+class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
+        self.tabWidget_control.setCurrentIndex(1)
+        self.tabWidget_functional.setCurrentIndex(1)
+        self.tabWidget_plots.setCurrentIndex(0)
+
+        # Выключаем штуки временно
         self.label_q1y.setVisible(False)
         self.lineEdit_q1y.setVisible(False)
-
         self.label_q2y.setVisible(False)
         self.lineEdit_q2y.setVisible(False)
 
         self.btn_cancel_calculate_plot.setVisible(False)
 
-        self.lineEdit_x1T.setReadOnly(True)
-        self.lineEdit_x2T.setReadOnly(True)
-
         self.lineEdit_q1y.setReadOnly(True)
         self.lineEdit_q2y.setReadOnly(True)
+
+        self.lineEdit_x1T.setReadOnly(True)
+        self.lineEdit_x2T.setReadOnly(True)
         self.lineEdit_jmin.setReadOnly(True)
 
         self.thread = {}
 
-        intValidator = QIntValidator()
-        intValidator.setLocale(QtCore.QLocale("en_US"))
-        self.lineEdit_N.setValidator(intValidator)
-        self.lineEdit_K.setValidator(intValidator)
-        self.lineEdit_M.setValidator(intValidator)
+        self.intValidator = QIntValidator()
+        self.intValidator.setLocale(QtCore.QLocale("en_US"))
+        self.lineEdit_N.setValidator(self.intValidator)
+        self.lineEdit_K.setValidator(self.intValidator)
+        self.lineEdit_M.setValidator(self.intValidator)
 
-        doubleValidator = QDoubleValidator()
-        doubleValidator.setLocale(QtCore.QLocale("en_US"))
+        self.doubleValidator = QDoubleValidator()
+        self.doubleValidator.setLocale(QtCore.QLocale("en_US"))
 
-        self.lineEdit_A00.setValidator(doubleValidator)
-        self.lineEdit_A01.setValidator(doubleValidator)
-        self.lineEdit_A10.setValidator(doubleValidator)
-        self.lineEdit_A11.setValidator(doubleValidator)
+        self.lineEdit_A00.setValidator(self.doubleValidator)
+        self.lineEdit_A01.setValidator(self.doubleValidator)
+        self.lineEdit_A10.setValidator(self.doubleValidator)
+        self.lineEdit_A11.setValidator(self.doubleValidator)
 
-        self.lineEdit_x10.setValidator(doubleValidator)
-        self.lineEdit_x20.setValidator(doubleValidator)
+        self.lineEdit_x10.setValidator(self.doubleValidator)
+        self.lineEdit_x20.setValidator(self.doubleValidator)
 
-        self.lineEdit_T.setValidator(doubleValidator)
+        self.lineEdit_T.setValidator(self.doubleValidator)
 
-        self.lineEdit_c1.setValidator(doubleValidator)
-        self.lineEdit_c2.setValidator(doubleValidator)
-        self.lineEdit_y1.setValidator(doubleValidator)
-        self.lineEdit_y2.setValidator(doubleValidator)
-        self.lineEdit_r.setValidator(doubleValidator)
-        self.lineEdit_a.setValidator(doubleValidator)
-        self.lineEdit_b.setValidator(doubleValidator)
+        self.lineEdit_c1.setValidator(self.doubleValidator)
+        self.lineEdit_c2.setValidator(self.doubleValidator)
+        self.lineEdit_y1.setValidator(self.doubleValidator)
+        self.lineEdit_y2.setValidator(self.doubleValidator)
+        self.lineEdit_r.setValidator(self.doubleValidator)
+        self.lineEdit_a.setValidator(self.doubleValidator)
+        self.lineEdit_b.setValidator(self.doubleValidator)
 
+        self.lineEdit_N.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_K.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_M.textChanged[str].connect(lambda: self.on_changed(333, 333))
+
+        self.lineEdit_A00.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_A01.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_A10.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_A11.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_x10.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_x20.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_T.textChanged[str].connect(lambda: self.on_changed(333, 333))
+
+        self.lineEdit_c1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_c2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_y1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_y2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_r.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_a.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_b.textChanged[str].connect(lambda: self.on_changed(333, 333))
+
+        self.tabWidget_control.tabBarClicked.connect(lambda current: self.on_changed(0, current))
+        self.tabWidget_functional.tabBarClicked.connect(lambda current: self.on_changed(1, current))
+
+        self.btn_help.clicked.connect(self.open_help_dialog)
         self.btn_cancel_calculate_plot.clicked.connect(self.cancel_calculations)
         self.btn_calculate_plot.clicked.connect(self.calculate_graph)
 
+    def open_help_dialog(self):
+        self.window = QtWidgets.QDialog()
+        self.ui = help.Ui_Dialog()
+        self.ui.setupUi(self.window)
+        self.window.show()
+
+    def on_changed(self, tab, current):
+        if tab == 0:
+            self.tabWidget_control.setCurrentIndex(current)
+        elif tab == 1:
+            self.tabWidget_functional.setCurrentIndex(current)
+        # print("Управление: {}".format(self.tabWidget_control.currentIndex()))
+        # print("Функционал: {}".format(self.tabWidget_functional.currentIndex()))
+        styles = "background-color: rgb(255, 0, 0);\ncolor: rgb(255, 255, 255);"
+        flag = True
+        text = [self.lineEdit_N.text(),
+                self.lineEdit_K.text(),
+                self.lineEdit_M.text(),
+                self.lineEdit_A00.text(),
+                self.lineEdit_A01.text(),
+                self.lineEdit_A10.text(),
+                self.lineEdit_A11.text(),
+                self.lineEdit_x10.text(),
+                self.lineEdit_x20.text(),
+                self.lineEdit_T.text(),
+                ]
+
+        if self.tabWidget_control.currentIndex() == 0:
+            text.append(self.lineEdit_r.text())
+        elif self.tabWidget_control.currentIndex() == 1:
+            text.append(self.lineEdit_a.text())
+            text.append(self.lineEdit_b.text())
+
+        if self.tabWidget_functional.currentIndex() == 0:
+            text.append(self.lineEdit_c1.text())
+            text.append(self.lineEdit_c2.text())
+        elif self.tabWidget_functional.currentIndex() == 1:
+            text.append(self.lineEdit_y1.text())
+            text.append(self.lineEdit_y2.text())
+
+        for txt in text:
+            if not (txt and txt.strip()):
+                styles = "background-color: rgb(160, 160, 160);\ncolor: rgb(0, 0, 0);"
+                flag = False
+                break
+
+        self.btn_calculate_plot.setStyleSheet(styles)
+        self.btn_calculate_plot.setEnabled(flag)
+
     def cancel_calculations(self):
+
         self.thread[1].stop()
         self.btn_cancel_calculate_plot.setVisible(False)
         self.btn_calculate_plot.setVisible(True)
@@ -92,6 +172,7 @@ class App(QtWidgets.QMainWindow, test.Ui_MainWindow):
         self.setCursor(QCursor(Qt.ArrowCursor))
 
     def calculate_graph(self):
+
         x0 = np.array([double(self.lineEdit_x10.text()), double(self.lineEdit_x20.text())])
         A = np.array([[double(self.lineEdit_A00.text()), double(self.lineEdit_A01.text())],
                       [double(self.lineEdit_A10.text()), double(self.lineEdit_A11.text())]])
@@ -237,7 +318,8 @@ class App(QtWidgets.QMainWindow, test.Ui_MainWindow):
             # main_MPL.axes.text(x0[0], x0[1] - 1, r'$x_{0}$', size=14)
 
         if y_bar is not None:
-            main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$\bar{y}$')
+            # main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$\bar{y}$')
+            main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$y$')
             # main_MPL.axes.text(y_bar[0], y_bar[1] - 1.3, r'$\bar{y}$', size=14)
         elif c is not None:
             main_MPL.axes.plot(c[0], c[1], 'o', label=r'$c$')
