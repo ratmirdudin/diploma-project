@@ -6,15 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>884</width>
-    <height>791</height>
+    <width>939</width>
+    <height>806</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>939</width>
+    <height>806</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Дипломный проект</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QFormLayout" name="formLayout">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QGroupBox" name="groupBox">
       <property name="sizePolicy">
@@ -25,8 +31,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>860</width>
-        <height>337</height>
+        <width>921</width>
+        <height>351</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>921</width>
+        <height>351</height>
        </size>
       </property>
       <property name="font">
@@ -35,12 +47,12 @@
        </font>
       </property>
       <property name="title">
-       <string>Параметры</string>
+       <string>Задача</string>
       </property>
       <widget class="QLabel" name="label_AL">
        <property name="geometry">
         <rect>
-         <x>49</x>
+         <x>69</x>
          <y>10</y>
          <width>36</width>
          <height>112</height>
@@ -63,7 +75,7 @@
       <widget class="QLabel" name="label_A">
        <property name="geometry">
         <rect>
-         <x>9</x>
+         <x>29</x>
          <y>60</y>
          <width>35</width>
          <height>25</height>
@@ -81,7 +93,7 @@
       <widget class="QLabel" name="label_AR">
        <property name="geometry">
         <rect>
-         <x>200</x>
+         <x>220</x>
          <y>10</y>
          <width>36</width>
          <height>112</height>
@@ -100,100 +112,7 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>250</y>
-         <width>149</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <layout class="QFormLayout" name="formLayout_11">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_x10">
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>x₁(0)=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_x10">
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>0.0000</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <property name="dragEnabled">
-           <bool>true</bool>
-          </property>
-          <property name="cursorMoveStyle">
-           <enum>Qt::LogicalMoveStyle</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>290</y>
-         <width>149</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <layout class="QFormLayout" name="formLayout_13">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_x20">
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>x₂(0)=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_x20">
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>0.0000</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>89</x>
+         <x>109</x>
          <y>40</y>
          <width>116</width>
          <height>72</height>
@@ -216,7 +135,7 @@
              </font>
             </property>
             <property name="text">
-             <string>0</string>
+             <string>1</string>
             </property>
            </widget>
           </item>
@@ -234,7 +153,7 @@
              </font>
             </property>
             <property name="text">
-             <string>1</string>
+             <string>0</string>
             </property>
            </widget>
           </item>
@@ -256,7 +175,7 @@
              </font>
             </property>
             <property name="text">
-             <string>-1</string>
+             <string>0</string>
             </property>
            </widget>
           </item>
@@ -274,7 +193,7 @@
              </font>
             </property>
             <property name="text">
-             <string>0</string>
+             <string>1</string>
             </property>
            </widget>
           </item>
@@ -282,143 +201,11 @@
         </item>
        </layout>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_K">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>254</y>
-         <width>60</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>60</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>100</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_K">
-       <property name="geometry">
-        <rect>
-         <x>277</x>
-         <y>254</y>
-         <width>27</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>K=</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_M">
-       <property name="geometry">
-        <rect>
-         <x>273</x>
-         <y>290</y>
-         <width>31</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>M=</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_M">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>290</y>
-         <width>60</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>60</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>1000</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_N">
-       <property name="geometry">
-        <rect>
-         <x>275</x>
-         <y>220</y>
-         <width>29</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>N=</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_N">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>220</y>
-         <width>60</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>60</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>60</string>
-       </property>
-      </widget>
       <widget class="QGroupBox" name="groupBox_functional">
        <property name="geometry">
         <rect>
-         <x>570</x>
-         <y>30</y>
+         <x>10</x>
+         <y>180</y>
          <width>271</width>
          <height>161</height>
         </rect>
@@ -441,7 +228,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
@@ -476,7 +263,7 @@
           </property>
           <layout class="QFormLayout" name="formLayout_18">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_c2">
+            <widget class="QLabel" name="label_functional_c2">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -488,7 +275,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_c2">
+            <widget class="QLineEdit" name="lineEdit_functional_c2">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -518,7 +305,7 @@
           </property>
           <layout class="QFormLayout" name="formLayout_19">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_c1">
+            <widget class="QLabel" name="label_functional_c1">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -530,7 +317,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_c1">
+            <widget class="QLineEdit" name="lineEdit_functional_c1">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -691,7 +478,7 @@
           </property>
           <layout class="QFormLayout" name="formLayout_3">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_y2">
+            <widget class="QLabel" name="label_functional_y2">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -703,7 +490,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_y2">
+            <widget class="QLineEdit" name="lineEdit_functional_y2">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -733,7 +520,7 @@
           </property>
           <layout class="QFormLayout" name="formLayout_4">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_y1">
+            <widget class="QLabel" name="label_functional_y1">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
@@ -745,7 +532,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_y1">
+            <widget class="QLineEdit" name="lineEdit_functional_y1">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -770,9 +557,9 @@
       <widget class="QGroupBox" name="groupBox_control">
        <property name="geometry">
         <rect>
-         <x>240</x>
-         <y>30</y>
-         <width>311</width>
+         <x>610</x>
+         <y>10</y>
+         <width>301</width>
          <height>161</height>
         </rect>
        </property>
@@ -784,7 +571,7 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>311</width>
+          <width>301</width>
           <height>141</height>
          </rect>
         </property>
@@ -794,18 +581,18 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_8">
          <attribute name="title">
-          <string>Круг/точка</string>
+          <string>Круг</string>
          </attribute>
          <widget class="QLabel" name="label_15">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>89</width>
+            <x>30</x>
+            <y>40</y>
+            <width>96</width>
             <height>25</height>
            </rect>
           </property>
@@ -815,33 +602,33 @@
            </font>
           </property>
           <property name="text">
-           <string>U = S (0)</string>
+           <string>U = S  (0)</string>
           </property>
          </widget>
          <widget class="QWidget" name="layoutWidget_9">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>70</y>
-            <width>111</width>
+            <x>150</x>
+            <y>40</y>
+            <width>121</width>
             <height>32</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout_23">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_r">
+            <widget class="QLabel" name="label_contol_r">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>r=</string>
+              <string>r₂=</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_r">
+            <widget class="QLineEdit" name="lineEdit_control_r">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -863,10 +650,10 @@
          <widget class="QLabel" name="label_21">
           <property name="geometry">
            <rect>
-            <x>65</x>
-            <y>30</y>
-            <width>11</width>
-            <height>25</height>
+            <x>85</x>
+            <y>50</y>
+            <width>16</width>
+            <height>23</height>
            </rect>
           </property>
           <property name="font">
@@ -875,27 +662,7 @@
            </font>
           </property>
           <property name="text">
-           <string>r</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_16">
-          <property name="geometry">
-           <rect>
-            <x>126</x>
-            <y>20</y>
-            <width>176</width>
-            <height>63</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>13</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Круг нулевого радиуса
-рассматривается,
-как точка</string>
+           <string>r₂</string>
           </property>
          </widget>
         </widget>
@@ -903,48 +670,30 @@
          <attribute name="title">
           <string>Прямоугольник/отрезок</string>
          </attribute>
-         <widget class="QLabel" name="label_U">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>20</y>
-            <width>282</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>U={(u₁, u₂): |u₁|&lt;a, |u₂|&lt;b}</string>
-          </property>
-         </widget>
          <widget class="QWidget" name="layoutWidget_10">
           <property name="geometry">
            <rect>
-            <x>170</x>
+            <x>160</x>
             <y>70</y>
-            <width>115</width>
+            <width>125</width>
             <height>32</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout_14">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_b">
+            <widget class="QLabel" name="label_control_b2">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>b=</string>
+              <string>b₂=</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_b">
+            <widget class="QLineEdit" name="lineEdit_control_b2">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -968,25 +717,25 @@
            <rect>
             <x>20</x>
             <y>70</y>
-            <width>114</width>
+            <width>125</width>
             <height>32</height>
            </rect>
           </property>
           <layout class="QFormLayout" name="formLayout_24">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_a">
+            <widget class="QLabel" name="label_control_b1">
              <property name="font">
               <font>
                <pointsize>16</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>a=</string>
+              <string>b₁=</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_a">
+            <widget class="QLineEdit" name="lineEdit_control_b1">
              <property name="maximumSize">
               <size>
                <width>80</width>
@@ -1005,11 +754,11 @@
            </item>
           </layout>
          </widget>
-         <widget class="QLabel" name="label_19">
+         <widget class="QLabel" name="label_26">
           <property name="geometry">
            <rect>
-            <x>178</x>
-            <y>21</y>
+            <x>158</x>
+            <y>20</y>
             <width>23</width>
             <height>39</height>
            </rect>
@@ -1023,11 +772,11 @@
            <string>−</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_20">
+         <widget class="QLabel" name="label_27">
           <property name="geometry">
            <rect>
-            <x>255</x>
-            <y>21</y>
+            <x>239</x>
+            <y>20</y>
             <width>23</width>
             <height>39</height>
            </rect>
@@ -1039,73 +788,34 @@
           </property>
           <property name="text">
            <string>−</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_U_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>271</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>U={(u₁, u₂): |u₁|&lt;b₁, |u₂|&lt;b₂}</string>
           </property>
          </widget>
         </widget>
        </widget>
       </widget>
-      <widget class="QLabel" name="label_N_2">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>220</y>
-         <width>448</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Agency FB</family>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>(Количество вершин для множества достижимости)</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_N_3">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>290</y>
-         <width>301</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Agency FB</family>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>(Численное решение задачи коши)</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_K_desc">
-       <property name="geometry">
-        <rect>
-         <x>380</x>
-         <y>254</y>
-         <width>292</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>Agency FB</family>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>(Разбиение для метода трапеций)</string>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="lineEdit_t0">
        <property name="geometry">
         <rect>
-         <x>91</x>
-         <y>151</y>
+         <x>112</x>
+         <y>138</y>
          <width>41</width>
          <height>30</height>
         </rect>
@@ -1128,8 +838,8 @@
       <widget class="QLabel" name="label_TLR">
        <property name="geometry">
         <rect>
-         <x>79</x>
-         <y>133</y>
+         <x>100</x>
+         <y>121</y>
          <width>146</width>
          <height>54</height>
         </rect>
@@ -1143,12 +853,560 @@
         <string>[        ]</string>
        </property>
       </widget>
+      <widget class="QGroupBox" name="groupBox_initSet">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>311</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Выбор начального множества</string>
+       </property>
+       <widget class="QTabWidget" name="tabWidget_initSet">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>311</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_10">
+         <attribute name="title">
+          <string>Круг/точка</string>
+         </attribute>
+         <widget class="QLabel" name="label_17">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>109</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>M₀ = S  (g)</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_12">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>125</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_25">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_initSet_g1">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>g₁=</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_initSet_g1">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>1.0000</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="label_22">
+          <property name="geometry">
+           <rect>
+            <x>77</x>
+            <y>30</y>
+            <width>16</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>r₁</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_15">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>20</y>
+            <width>121</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_27">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_initSet_r1">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>r₁=</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_initSet_r">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>0.0000</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_16">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>70</y>
+            <width>125</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_28">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_initSet_g2">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>g₂=</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_initSet_g2">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>-1.0000</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_11">
+         <attribute name="title">
+          <string>Прямоугольник/отрезок</string>
+         </attribute>
+         <widget class="QLabel" name="label_U_2">
+          <property name="geometry">
+           <rect>
+            <x>1</x>
+            <y>20</y>
+            <width>301</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>M₀={(m₁, m₂): |m₁|&lt;a₁, |m₂|&lt;a₂}</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_13">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>70</y>
+            <width>124</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_20">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_initSet_a2">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>a₂=</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_initSet_a2">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>1.0000</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget_14">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>70</y>
+            <width>124</width>
+            <height>32</height>
+           </rect>
+          </property>
+          <layout class="QFormLayout" name="formLayout_26">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_initSet_a1">
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>a₁=</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_initSet_a1">
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>1.0000</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="label_24">
+          <property name="geometry">
+           <rect>
+            <x>176</x>
+            <y>20</y>
+            <width>23</width>
+            <height>39</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>17</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>−</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_25">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>20</y>
+            <width>23</width>
+            <height>39</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>17</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>−</string>
+          </property>
+         </widget>
+         <zorder>label_U_2</zorder>
+         <zorder>label_25</zorder>
+         <zorder>label_24</zorder>
+         <zorder>layoutWidget_13</zorder>
+         <zorder>layoutWidget_14</zorder>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>180</y>
+         <width>621</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Итеративные параметры точности вычислений</string>
+       </property>
+       <widget class="QLabel" name="label_N_3">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>110</y>
+          <width>301</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>(Численное решение задачи коши)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_M">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>110</y>
+          <width>31</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>M=</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_M">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>110</y>
+          <width>60</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>1000</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_K">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>74</y>
+          <width>60</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>100</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_K">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>74</y>
+          <width>27</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>K=</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_K_desc">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>74</y>
+          <width>292</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>(Разбиение для метода трапеций)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_N_2">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>40</y>
+          <width>448</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>(Количество вершин для множества достижимости)</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEdit_N">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>40</y>
+          <width>60</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>60</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_N">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>40</y>
+          <width>29</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>N=</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QLabel" name="label_T">
        <property name="geometry">
         <rect>
-         <x>6</x>
-         <y>150</y>
-         <width>74</width>
+         <x>27</x>
+         <y>138</y>
+         <width>73</width>
          <height>25</height>
         </rect>
        </property>
@@ -1158,14 +1416,14 @@
         </font>
        </property>
        <property name="text">
-        <string>[t0, T]=</string>
+        <string>[t₀, T]=</string>
        </property>
       </widget>
       <widget class="QLineEdit" name="lineEdit_T">
        <property name="geometry">
         <rect>
-         <x>138</x>
-         <y>151</y>
+         <x>159</x>
+         <y>138</y>
          <width>74</width>
          <height>30</height>
         </rect>
@@ -1182,38 +1440,35 @@
         </font>
        </property>
        <property name="text">
-        <string>6.2832</string>
+        <string>1</string>
        </property>
       </widget>
+      <zorder>groupBox_2</zorder>
       <zorder>label_TLR</zorder>
-      <zorder>label_M</zorder>
       <zorder>label_AL</zorder>
       <zorder>label_A</zorder>
       <zorder>label_AR</zorder>
       <zorder>layoutWidget</zorder>
       <zorder>layoutWidget</zorder>
-      <zorder>layoutWidget</zorder>
-      <zorder>layoutWidget</zorder>
-      <zorder>lineEdit_K</zorder>
-      <zorder>label_K</zorder>
-      <zorder>lineEdit_M</zorder>
-      <zorder>label_N</zorder>
-      <zorder>lineEdit_N</zorder>
       <zorder>groupBox_control</zorder>
       <zorder>groupBox_functional</zorder>
-      <zorder>label_N_2</zorder>
-      <zorder>label_N_3</zorder>
-      <zorder>label_K_desc</zorder>
       <zorder>lineEdit_T</zorder>
       <zorder>lineEdit_t0</zorder>
+      <zorder>groupBox_initSet</zorder>
      </widget>
     </item>
     <item row="1" column="0">
      <widget class="QGroupBox" name="groupBox_solve_and_results">
       <property name="minimumSize">
        <size>
-        <width>860</width>
-        <height>421</height>
+        <width>921</width>
+        <height>431</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>921</width>
+        <height>431</height>
        </size>
       </property>
       <property name="font">
@@ -1227,10 +1482,10 @@
       <widget class="QGroupBox" name="groupBox_3">
        <property name="geometry">
         <rect>
-         <x>1</x>
+         <x>10</x>
          <y>21</y>
-         <width>211</width>
-         <height>391</height>
+         <width>261</width>
+         <height>401</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -1248,8 +1503,8 @@
        <widget class="QPushButton" name="btn_calculate_plot">
         <property name="geometry">
          <rect>
-          <x>35</x>
-          <y>40</y>
+          <x>65</x>
+          <y>110</y>
           <width>141</width>
           <height>56</height>
          </rect>
@@ -1275,9 +1530,9 @@ color: rgb(255, 255, 255);</string>
        <widget class="QProgressBar" name="pbar">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>160</y>
-          <width>181</width>
+          <x>20</x>
+          <y>180</y>
+          <width>221</width>
           <height>23</height>
          </rect>
         </property>
@@ -1308,8 +1563,8 @@ color: rgb(255, 255, 255);</string>
        <widget class="QPushButton" name="btn_cancel_calculate_plot">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>40</y>
+          <x>60</x>
+          <y>110</y>
           <width>151</width>
           <height>56</height>
          </rect>
@@ -1337,7 +1592,7 @@ color: rgb(255, 255, 255);</string>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>50</x>
           <y>311</y>
           <width>153</width>
           <height>32</height>
@@ -1379,94 +1634,7 @@ color: rgb(255, 255, 255);</string>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>150</y>
-          <width>197</width>
-          <height>32</height>
-         </rect>
-        </property>
-        <layout class="QFormLayout" name="formLayout_7">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_q1y">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>q₁#(y)=</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_q1y">
-           <property name="maximumSize">
-            <size>
-             <width>110</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>184</y>
-          <width>197</width>
-          <height>32</height>
-         </rect>
-        </property>
-        <layout class="QFormLayout" name="formLayout_8">
-         <property name="labelAlignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_q2y">
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>q₂#(y)=</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_q2y">
-           <property name="maximumSize">
-            <size>
-             <width>110</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>16</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
+          <x>30</x>
           <y>264</y>
           <width>193</width>
           <height>32</height>
@@ -1508,7 +1676,7 @@ color: rgb(255, 255, 255);</string>
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>30</x>
           <y>230</y>
           <width>193</width>
           <height>32</height>
@@ -1560,7 +1728,7 @@ color: rgb(255, 255, 255);</string>
         <property name="geometry">
          <rect>
           <x>100</x>
-          <y>350</y>
+          <y>360</y>
           <width>101</width>
           <height>31</height>
          </rect>
@@ -1574,8 +1742,117 @@ color: rgb(255, 255, 255);</string>
          <string>Помощь</string>
         </property>
        </widget>
-       <zorder>layoutWidget</zorder>
-       <zorder>layoutWidget</zorder>
+       <widget class="QLabel" name="label_solve_M0">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>14</y>
+          <width>179</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_19">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>48</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>M₀ −</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_20">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>36</y>
+          <width>43</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>U  −</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_solve_U">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>40</y>
+          <width>179</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_23">
+        <property name="geometry">
+         <rect>
+          <x>19</x>
+          <y>62</y>
+          <width>43</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>J  −</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_solve_J">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>66</y>
+          <width>179</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
@@ -1583,12 +1860,18 @@ color: rgb(255, 255, 255);</string>
        <zorder>btn_calculate_plot</zorder>
        <zorder>pbar</zorder>
        <zorder>btn_help</zorder>
+       <zorder>label_solve_M0</zorder>
+       <zorder>label_19</zorder>
+       <zorder>label_20</zorder>
+       <zorder>label_solve_U</zorder>
+       <zorder>label_23</zorder>
+       <zorder>label_solve_J</zorder>
       </widget>
       <widget class="QTabWidget" name="tabWidget_plots">
        <property name="geometry">
         <rect>
-         <x>220</x>
-         <y>0</y>
+         <x>280</x>
+         <y>10</y>
          <width>631</width>
          <height>411</height>
         </rect>
@@ -1699,6 +1982,38 @@ color: rgb(255, 255, 255);</string>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>939</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <action name="action">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="action_2">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -1715,25 +2030,21 @@ color: rgb(255, 255, 255);</string>
   <tabstop>lineEdit_A10</tabstop>
   <tabstop>lineEdit_A11</tabstop>
   <tabstop>tabWidget_control</tabstop>
-  <tabstop>lineEdit_r</tabstop>
-  <tabstop>lineEdit_a</tabstop>
-  <tabstop>lineEdit_b</tabstop>
+  <tabstop>lineEdit_control_r</tabstop>
+  <tabstop>lineEdit_control_b1</tabstop>
+  <tabstop>lineEdit_control_b2</tabstop>
   <tabstop>tabWidget_functional</tabstop>
-  <tabstop>lineEdit_c1</tabstop>
-  <tabstop>lineEdit_c2</tabstop>
-  <tabstop>lineEdit_y1</tabstop>
-  <tabstop>lineEdit_y2</tabstop>
+  <tabstop>lineEdit_functional_c1</tabstop>
+  <tabstop>lineEdit_functional_c2</tabstop>
+  <tabstop>lineEdit_functional_y1</tabstop>
+  <tabstop>lineEdit_functional_y2</tabstop>
   <tabstop>lineEdit_T</tabstop>
-  <tabstop>lineEdit_x10</tabstop>
-  <tabstop>lineEdit_x20</tabstop>
   <tabstop>lineEdit_N</tabstop>
   <tabstop>lineEdit_K</tabstop>
   <tabstop>lineEdit_M</tabstop>
   <tabstop>tabWidget_plots</tabstop>
   <tabstop>btn_cancel_calculate_plot</tabstop>
   <tabstop>btn_calculate_plot</tabstop>
-  <tabstop>lineEdit_q1y</tabstop>
-  <tabstop>lineEdit_q2y</tabstop>
   <tabstop>lineEdit_x1T</tabstop>
   <tabstop>lineEdit_x2T</tabstop>
   <tabstop>lineEdit_jmin</tabstop>

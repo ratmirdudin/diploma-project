@@ -38,20 +38,22 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.tabWidget_control.setCurrentIndex(1)
-        self.tabWidget_functional.setCurrentIndex(1)
+        self.tabWidget_initSet.setCurrentIndex(0)
+        self.tabWidget_control.setCurrentIndex(0)
+        self.tabWidget_functional.setCurrentIndex(0)
         self.tabWidget_plots.setCurrentIndex(0)
 
-        # Выключаем штуки временно
-        self.label_q1y.setVisible(False)
-        self.lineEdit_q1y.setVisible(False)
-        self.label_q2y.setVisible(False)
-        self.lineEdit_q2y.setVisible(False)
+        text_solve_M0 = self.tabWidget_initSet.tabText(self.tabWidget_initSet.currentIndex())
+        text_solve_U = self.tabWidget_control.tabText(self.tabWidget_control.currentIndex())
+        text_solve_J = self.tabWidget_functional.tabText(self.tabWidget_functional.currentIndex())
+        self.label_solve_M0.setText(text_solve_M0)
+        self.label_solve_U.setText(text_solve_U)
+        self.label_solve_J.setText(text_solve_J)
+
+        # Временно выключим
+        self.btn_help.setVisible(False)
 
         self.btn_cancel_calculate_plot.setVisible(False)
-
-        self.lineEdit_q1y.setReadOnly(True)
-        self.lineEdit_q2y.setReadOnly(True)
 
         self.lineEdit_x1T.setReadOnly(True)
         self.lineEdit_x2T.setReadOnly(True)
@@ -59,61 +61,81 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         self.thread = {}
 
+        # Валидаторы
         self.intValidator = QIntValidator()
         self.intValidator.setLocale(QtCore.QLocale("en_US"))
-        self.lineEdit_N.setValidator(self.intValidator)
-        self.lineEdit_K.setValidator(self.intValidator)
-        self.lineEdit_M.setValidator(self.intValidator)
 
         self.doubleValidator = QDoubleValidator()
         self.doubleValidator.setLocale(QtCore.QLocale("en_US"))
 
+        # Основные параметры
+        self.lineEdit_N.setValidator(self.intValidator)
+        self.lineEdit_K.setValidator(self.intValidator)
+        self.lineEdit_M.setValidator(self.intValidator)
+        self.lineEdit_N.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_K.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_M.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_A00.setValidator(self.doubleValidator)
         self.lineEdit_A01.setValidator(self.doubleValidator)
         self.lineEdit_A10.setValidator(self.doubleValidator)
         self.lineEdit_A11.setValidator(self.doubleValidator)
-
-        self.lineEdit_x10.setValidator(self.doubleValidator)
-        self.lineEdit_x20.setValidator(self.doubleValidator)
-
-        self.lineEdit_t0.setValidator(self.doubleValidator)
-        self.lineEdit_T.setValidator(self.doubleValidator)
-
-        self.lineEdit_c1.setValidator(self.doubleValidator)
-        self.lineEdit_c2.setValidator(self.doubleValidator)
-        self.lineEdit_y1.setValidator(self.doubleValidator)
-        self.lineEdit_y2.setValidator(self.doubleValidator)
-        self.lineEdit_r.setValidator(self.doubleValidator)
-        self.lineEdit_a.setValidator(self.doubleValidator)
-        self.lineEdit_b.setValidator(self.doubleValidator)
-
-        self.lineEdit_N.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_K.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_M.textChanged[str].connect(lambda: self.on_changed(333, 333))
-
         self.lineEdit_A00.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_A01.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_A10.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_A11.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_x10.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_x20.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_T.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_t0.setValidator(self.doubleValidator)
+        self.lineEdit_T.setValidator(self.doubleValidator)
         self.lineEdit_t0.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_T.textChanged[str].connect(lambda: self.on_changed(333, 333))
 
-        self.lineEdit_c1.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_c2.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_y1.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_y2.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_r.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_a.textChanged[str].connect(lambda: self.on_changed(333, 333))
-        self.lineEdit_b.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        # Параметры начального множества
+        self.lineEdit_initSet_r.setValidator(self.doubleValidator)
+        self.lineEdit_initSet_g1.setValidator(self.doubleValidator)
+        self.lineEdit_initSet_g2.setValidator(self.doubleValidator)
+        self.lineEdit_initSet_a1.setValidator(self.doubleValidator)
+        self.lineEdit_initSet_a2.setValidator(self.doubleValidator)
+        self.lineEdit_initSet_r.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_initSet_g1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_initSet_g2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_initSet_a1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_initSet_a2.textChanged[str].connect(lambda: self.on_changed(333, 333))
 
-        self.tabWidget_control.tabBarClicked.connect(lambda current: self.on_changed(0, current))
-        self.tabWidget_functional.tabBarClicked.connect(lambda current: self.on_changed(1, current))
+        # Параметры функционала
+        self.lineEdit_functional_c1.setValidator(self.doubleValidator)
+        self.lineEdit_functional_c2.setValidator(self.doubleValidator)
+        self.lineEdit_functional_y1.setValidator(self.doubleValidator)
+        self.lineEdit_functional_y2.setValidator(self.doubleValidator)
+        self.lineEdit_functional_c1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_functional_c2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_functional_y1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_functional_y2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+
+        # Параметры управления
+        self.lineEdit_control_r.setValidator(self.doubleValidator)
+        self.lineEdit_control_b1.setValidator(self.doubleValidator)
+        self.lineEdit_control_b2.setValidator(self.doubleValidator)
+        self.lineEdit_control_r.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_control_b1.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_control_b2.textChanged[str].connect(lambda: self.on_changed(333, 333))
+
+        self.tabWidget_initSet.tabBarClicked.connect(lambda currentTab: self.on_changed(0, currentTab))
+        self.tabWidget_control.tabBarClicked.connect(lambda currentTab: self.on_changed(1, currentTab))
+        self.tabWidget_functional.tabBarClicked.connect(lambda currentTab: self.on_changed(2, currentTab))
 
         self.btn_help.clicked.connect(self.open_help_dialog)
         self.btn_cancel_calculate_plot.clicked.connect(self.cancel_calculations)
         self.btn_calculate_plot.clicked.connect(self.calculate_graph)
+
+        self.menu.addAction("Выход", self.action_clicked)
+        self.menu_2.addAction("О программе", self.action_clicked)
+
+    @QtCore.pyqtSlot()
+    def action_clicked(self):
+        action = self.sender()
+        if action.text() == "Выход":
+            self.close()
+        elif action.text() == "О программе":
+            self.open_help_dialog()
 
     def open_help_dialog(self):
         self.window = QtWidgets.QDialog()
@@ -122,12 +144,20 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.window.show()
 
     def on_changed(self, tab, current):
-        if tab == 0:
-            self.tabWidget_control.setCurrentIndex(current)
-        elif tab == 1:
-            self.tabWidget_functional.setCurrentIndex(current)
-        # print("Управление: {}".format(self.tabWidget_control.currentIndex()))
-        # print("Функционал: {}".format(self.tabWidget_functional.currentIndex()))
+        match tab:
+            case 0:
+                self.tabWidget_initSet.setCurrentIndex(current)
+                text_solve_M0 = self.tabWidget_initSet.tabText(current)
+                self.label_solve_M0.setText(text_solve_M0)
+            case 1:
+                self.tabWidget_control.setCurrentIndex(current)
+                text_solve_U = self.tabWidget_control.tabText(current)
+                self.label_solve_U.setText(text_solve_U)
+            case 2:
+                self.tabWidget_functional.setCurrentIndex(current)
+                text_solve_J = self.tabWidget_functional.tabText(current)
+                self.label_solve_J.setText(text_solve_J)
+
         styles = "background-color: rgb(255, 0, 0);\ncolor: rgb(255, 255, 255);"
         flag = True
         text = [self.lineEdit_N.text(),
@@ -137,24 +167,33 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 self.lineEdit_A01.text(),
                 self.lineEdit_A10.text(),
                 self.lineEdit_A11.text(),
-                self.lineEdit_x10.text(),
-                self.lineEdit_x20.text(),
-                self.lineEdit_T.text(),
                 self.lineEdit_t0.text(),
+                self.lineEdit_T.text(),
                 ]
 
-        if self.tabWidget_control.currentIndex() == 0:
-            text.append(self.lineEdit_r.text())
-        elif self.tabWidget_control.currentIndex() == 1:
-            text.append(self.lineEdit_a.text())
-            text.append(self.lineEdit_b.text())
+        match self.tabWidget_initSet.currentIndex():
+            case 0:
+                text.append(self.lineEdit_initSet_r.text())
+                text.append(self.lineEdit_initSet_g1.text())
+                text.append(self.lineEdit_initSet_g2.text())
+            case 1:
+                text.append(self.lineEdit_initSet_a1.text())
+                text.append(self.lineEdit_initSet_a2.text())
 
-        if self.tabWidget_functional.currentIndex() == 0:
-            text.append(self.lineEdit_c1.text())
-            text.append(self.lineEdit_c2.text())
-        elif self.tabWidget_functional.currentIndex() == 1:
-            text.append(self.lineEdit_y1.text())
-            text.append(self.lineEdit_y2.text())
+        match self.tabWidget_control.currentIndex():
+            case 0:
+                text.append(self.lineEdit_control_r.text())
+            case 1:
+                text.append(self.lineEdit_control_b1.text())
+                text.append(self.lineEdit_control_b2.text())
+
+        match self.tabWidget_functional.currentIndex():
+            case 0:
+                text.append(self.lineEdit_functional_c1.text())
+                text.append(self.lineEdit_functional_c2.text())
+            case 1:
+                text.append(self.lineEdit_functional_y1.text())
+                text.append(self.lineEdit_functional_y2.text())
 
         for txt in text:
             if not (txt and txt.strip()):
@@ -166,7 +205,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.btn_calculate_plot.setEnabled(flag)
 
     def cancel_calculations(self):
-
         self.thread[1].stop()
         self.btn_cancel_calculate_plot.setVisible(False)
         self.btn_calculate_plot.setVisible(True)
@@ -174,10 +212,69 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.setCursor(QCursor(Qt.ArrowCursor))
 
     def calculate_graph(self):
+        # print("Начальное множество: {}".format(self.label_solve_M0.text()))
+        # print("Управление: {}".format(self.label_solve_U.text()))
+        # print("Функционал: {}".format(self.label_solve_J.text()))
 
-        x0 = np.array([double(self.lineEdit_x10.text()), double(self.lineEdit_x20.text())])
         A = np.array([[double(self.lineEdit_A00.text()), double(self.lineEdit_A01.text())],
                       [double(self.lineEdit_A10.text()), double(self.lineEdit_A11.text())]])
+
+        sf_M0 = None
+        x0 = None
+        match self.tabWidget_initSet.currentIndex():
+            case 0:
+                print("Начальное множество: Круг/точка")
+                r1 = double(self.lineEdit_initSet_r.text())
+                g1 = double(self.lineEdit_initSet_g1.text())
+                g2 = double(self.lineEdit_initSet_g2.text())
+                sf_M0 = lambda psi: g1 * psi[0] + g2 * psi[1] + abs(r1) * linalg.norm(psi)
+
+                if r1 == 0:
+                    x0 = [g1, g2]
+                else:
+                    phi = np.linspace(0, 2 * np.pi, 100)
+                    x = g1 + r1 * np.cos(phi)
+                    y = g2 + r1 * np.sin(phi)
+                    x0 = [x, y]
+            case 1:
+                print("Начальное множество: Прямоугольник/отрезок")
+                a1 = double(self.lineEdit_initSet_a1.text())
+                a2 = double(self.lineEdit_initSet_a2.text())
+                sf_M0 = lambda psi: abs(a1) * abs(psi[0]) + abs(a2) * abs(psi[1])
+                x0 = [[-a1, a1, a1, -a1, -a1], [a2, a2, -a2, -a2, a2]]
+
+        sf_U = None
+        u_opt_func = None
+        match self.tabWidget_control.currentIndex():
+            case 0:
+                print("Управление: Круг")
+                r2 = double(self.lineEdit_control_r.text())
+                sf_U = lambda psi: abs(r2) * linalg.norm(psi)
+                u_opt_func = lambda psi: psi / (r2 * linalg.norm(psi))
+            case 1:
+                print("Управление: Прямоугольник/отрезок")
+                b1 = double(self.lineEdit_control_b1.text())
+                b2 = double(self.lineEdit_control_b2.text())
+                sf_U = lambda psi: abs(b1) * abs(psi[0]) + abs(b2) * abs(psi[1])  # опорная функция для управления
+
+                def tmp(psi):
+                    ui = np.zeros(2)
+                    if psi[0] > 0:
+                        ui[0] = b1
+                    elif psi[0] < 0:
+                        ui[0] = (-b1)
+                    else:
+                        ui[0] = 0
+
+                    if psi[1] > 0:
+                        ui[1] = b2
+                    elif psi[1] < 0:
+                        ui[1] = (-b2)
+                    else:
+                        ui[1] = 0
+                    return ui
+
+                u_opt_func = lambda psi: tmp(psi)
 
         J = None
         c = None
@@ -185,67 +282,36 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         q_bar = None
         match self.tabWidget_functional.currentIndex():
             case 0:
-                c = np.array([double(self.lineEdit_c1.text()), double(self.lineEdit_c2.text())])
+                print("Функционал: Линейный")
+                c = np.array([double(self.lineEdit_functional_c1.text()), double(self.lineEdit_functional_c2.text())])
                 J = lambda x_T: x_T.dot(c)
                 q_bar = lambda tmp: -c
-                print("Линейный")
             case 1:
-                y_bar = np.array([double(self.lineEdit_y1.text()), double(self.lineEdit_y2.text())])
+                print("Функционал: Квадратичный")
+                y_bar = np.array(
+                    [double(self.lineEdit_functional_y1.text()), double(self.lineEdit_functional_y2.text())])
                 J = lambda x_T: 1 / 2 * linalg.norm(x_T - y_bar) ** 2  # терминальный функционал
                 q_bar = lambda x_T_opt: y_bar - x_T_opt
-                print("Квадратичный")
 
-        sf_U = None
-        u_opt_func = None
-        match self.tabWidget_control.currentIndex():
-            case 0:
-                r = double(self.lineEdit_r.text())
-                sf_U = lambda psi: abs(r) * linalg.norm(psi)
-                u_opt_func = lambda psi: psi / linalg.norm(psi)
-                print("Круг/точка")
-            case 1:
-                a = double(self.lineEdit_a.text())
-                b = double(self.lineEdit_b.text())
-                sf_U = lambda psi: abs(a) * abs(psi[0]) + abs(b) * abs(psi[1])  # опорная функция для управления
-
-                def tmp(psi):
-                    ui = np.zeros(2)
-                    if psi[0] > 0:
-                        ui[0] = a
-                    elif psi[0] < 0:
-                        ui[0] = (-a)
-                    else:
-                        ui[0] = 0
-
-                    if psi[1] > 0:
-                        ui[1] = b
-                    elif psi[1] < 0:
-                        ui[1] = (-b)
-                    else:
-                        ui[1] = 0
-                    return ui
-
-                u_opt_func = lambda psi: tmp(psi)
-                print("Прямоугольник/отрезок")
-
-        if J is None or sf_U is None:
-            print("Ошибка: J или sf_U не определена")
+        if (J or sf_U or sf_M0 or q_bar or u_opt_func) is None:
+            print("Ошибка: некоторые функции не определена")
             return
 
         params = {
             "N": int(self.lineEdit_N.text()),
-            "M": int(self.lineEdit_M.text()),
             "K": int(self.lineEdit_K.text()),
+            "M": int(self.lineEdit_M.text()),
             "t0": double(self.lineEdit_t0.text()),
             "T": double(self.lineEdit_T.text()),
             "A": A,
-            "x0": x0,
             "y_bar": y_bar,
             "c": c,
             "J": J,
+            "sf_M0": sf_M0,
             "sf_U": sf_U,
             "q_bar": q_bar,
-            "u_opt_func": u_opt_func
+            "u_opt_func": u_opt_func,
+            "x0": x0,
         }
 
         self.thread[1] = ThreadClass(self.long_running_task, params, parent=None)
@@ -264,20 +330,12 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.thread[1].finishing.connect(self.thread[1].stop)
 
     def getting_data(self, data):
-        # {"minJ": minJ,
-        #  "x_T_opt": x_T_opt,
-        #  "q_bar": q_bar,
-        #  "x_T": [plot_x, plot_y],
-        #  "u_opt": u_opt,
-        #  "x": [x1, x2],
-        #  "y_bar": y_bar,
-        #  "x0": x0,
-        #  "N": N}
-
         x_T = data.get("x_T")
         x_T_opt = data.get("x_T_opt")
         x = data.get("x")
+        # Получаем None
         x0 = data.get("x0")
+
         y_bar = data.get("y_bar")
         c = data.get("c")
 
@@ -289,12 +347,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         self.draw_canvas(x_T, x_T_opt, x, x0, y_bar, c, t_g, u_opt)
 
-        convert = lambda t: str('{:.7f}'.format(t))
-
-        q_bar = data.get("q_bar")
-        if q_bar is not None:
-            self.lineEdit_q1y.setText(convert(q_bar[0]))
-            self.lineEdit_q2y.setText(convert(q_bar[1]))
+        convert = lambda t: str('{:.6f}'.format(t))
 
         minJ = data.get("minJ")
         if minJ is not None:
@@ -318,23 +371,21 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                            linestyle='--')  # начертание
 
         if x0 is not None:
-            main_MPL.axes.plot(x0[0], x0[1], 'o', label=r'$x_{0}$')
-            # main_MPL.axes.text(x0[0], x0[1] - 1, r'$x_{0}$', size=14)
+            if np.size(x0) == 2:
+                main_MPL.axes.plot(x0[0], x0[1], 'o', label=r'$M_{0}$')
+            else:
+                main_MPL.axes.plot(x0[0], x0[1], label=r'$M_{0}$')
 
         if y_bar is not None:
-            # main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$\bar{y}$')
             main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$y$')
-            # main_MPL.axes.text(y_bar[0], y_bar[1] - 1.3, r'$\bar{y}$', size=14)
         elif c is not None:
             main_MPL.axes.plot(c[0], c[1], 'o', label=r'$c$')
-            # main_MPL.axes.text(c[0], c[1] - 1.3, r'$c$', size=14)
 
         if x_T is not None:
-            main_MPL.axes.plot(x_T[0], x_T[1], label='x(T)')
+            main_MPL.axes.plot(x_T[0], x_T[1], label=r'$x(T)$')
 
         if x_T_opt is not None:
             main_MPL.axes.plot(x_T_opt[0], x_T_opt[1], 'ok', label=r'$x_{*}(T)$')
-            # main_MPL.axes.text(x_T_opt[0] - 1.4, x_T_opt[1] - 1.6, r'$x_{*}(T)$', size=14)
 
         if x is not None:
             main_MPL.axes.plot(x[0], x[1], label=r'$x$')
@@ -354,8 +405,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             u2_MPL.axes.plot(t_g, u_opt[1], label=r'$u_{2}(t)$')
             u2_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
 
-        # pos = main_MPL.axes.get_position()
-        # main_MPL.axes.set_position([pos.x0, pos.y0, pos.width * 0.9, pos.height])
         main_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
         main_MPL.draw()
 
@@ -370,15 +419,18 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         M = params.get("M")  # Численное решение задачи коши
         t0 = params.get("t0")
         T = params.get("T")
-        x0 = params.get("x0")
         A = params.get("A")
-        J = params.get("J")
+
+        sf_M0 = params.get("sf_M0")
+        x0 = params.get("x0")
+
         sf_U = params.get("sf_U")
+        u_opt_func = params.get("u_opt_func")
 
         c = params.get("c")
         y_bar = params.get("y_bar")
+        J = params.get("J")
         q_bar_func = params.get("q_bar")
-        u_opt_func = params.get("u_opt_func")
 
         expm = lambda t: linalg.expm(t * A)
 
@@ -387,7 +439,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         # ---------START---------
         start_time = time.time()
-        x_T = covered_reachability_set(expm, expm_transpose, sf_U, t0, T, x0, N, K, update_pbar_signal)
+        x_T = covered_reachability_set(expm, expm_transpose, sf_M0, sf_U, t0, T, N, K, update_pbar_signal)
         end_time1 = float('{:.3f}'.format(time.time() - start_time))
 
         start_time = time.time()
@@ -400,7 +452,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         end_time3 = float('{:.3f}'.format(time.time() - start_time))
 
         start_time = time.time()
-        x1, x2 = euler_solve(t0, T, x0, A, u_opt, M)
+        x1, x2 = euler_solve(t0, T, A, x_T_opt, u_opt, M)
         end_time4 = float('{:.3f}'.format(time.time() - start_time))
 
         end_time = float('{:.6f}'.format(end_time1 + end_time2 + end_time3 + end_time4))
@@ -435,11 +487,11 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                               "x": [x1, x2],
                               "y_bar": y_bar,
                               "c": c,
-                              "x0": x0,
                               "N": N,
                               "M": M,
                               "T": T,
-                              "t0": t0
+                              "t0": t0,
+                              "x0": x0,
                               })
 
 

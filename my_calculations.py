@@ -5,14 +5,14 @@ import scipy.integrate as integrate
 from scipy import linalg as linalg
 
 
-def covered_reachability_set(expm, expm_transpose, sf, t0, T, x0, N, K, update_pbar_signal):
+def covered_reachability_set(expm, expm_transpose, sf_M0, sf_U, t0, T, N, K, update_pbar_signal):
     progress = 0
     total_calculations = N + N + N * K + N
-    calculate_percent = lambda current, total: math.floor(current * 85 / total)
+    calculate_percent = lambda current, total: math.floor(current * 50 / total)
 
     alpha = np.zeros(N)
     for i in range(N):
-        alpha[i] = 2 * np.pi * i / N  # Тут вопрос, T-t0 или 2*Pi ????
+        alpha[i] = 2 * np.pi * i / N
 
         progress = progress + 1
 
@@ -27,16 +27,17 @@ def covered_reachability_set(expm, expm_transpose, sf, t0, T, x0, N, K, update_p
 
     x_g = np.linspace(t0, T, K)
     f_g = np.zeros(K)
-    expmA_dot_x0 = expm(T - t0).dot(x0)
+    expmA = expm(T - t0).dot(np.array([1, -1]))
+    expmTransA = expm_transpose(T - t0)
     c = np.zeros(N)
+
     for i in range(N):
         for j in range(K):
-            f_g[j] = sf(expm_transpose(T - x_g[j]).dot(psi[i]))
+            f_g[j] = sf_U(expm_transpose(T - x_g[j]).dot(psi[i]))
 
             progress = progress + 1
 
-        c[i] = expmA_dot_x0.dot(psi[i]) + integrate.trapz(f_g, x_g)
-
+        c[i] = sf_M0(expmTransA.dot(psi[i])) + integrate.trapz(f_g, x_g)
         update_pbar_signal.emit(calculate_percent(progress, total_calculations))
 
     x = np.zeros((N, 2))
@@ -66,7 +67,7 @@ def minimize_functional(J, x_T, N):
 def optimal_control(expm_transpose, u_opt_func, t0, T, q_bar, M, update_pbar_signal):
     progress = 0
     total_calculations = M
-    calculate_percent = lambda current, total: 85 + math.floor(current * 15 / total)
+    calculate_percent = lambda current, total: 50 + math.floor(current * 50 / total)
 
     psi = np.zeros((M, 2))
     u = np.zeros((M, 2))
@@ -84,19 +85,23 @@ def optimal_control(expm_transpose, u_opt_func, t0, T, q_bar, M, update_pbar_sig
     return u
 
 
-def euler_solve(t0, T, x0, A, u, M):
+def euler_solve(t0, T, A, x_T_opt, u, M):
     h = (T - t0) / (M - 1)
 
     x1 = np.zeros(M)
     x2 = np.zeros(M)
 
-    x1[0] = x0[0]
-    x2[0] = x0[1]
-
     f1 = lambda x1, x2, u1: A[0][0] * x1 + A[0][1] * x2 + u1
     f2 = lambda x1, x2, u2: A[1][0] * x1 + A[1][1] * x2 + u2
 
-    for i in range(M - 1):
-        x1[i + 1] = x1[i] + h * f1(x1[i], x2[i], u[i][0])
-        x2[i + 1] = x2[i] + h * f2(x1[i], x2[i], u[i][1])
+    x1[M - 1] = x_T_opt[0]
+    x2[M - 1] = x_T_opt[1]
+    for i in range(M - 1, 0, -1):
+        x1[i - 1] = x1[i] - h * f1(x1[i], x2[i], u[i][0])
+        x2[i - 1] = x2[i] - h * f2(x1[i], x2[i], u[i][1])
+    # x1[0] = 0
+    # x2[0] = 0
+    # for i in range(M - 1):
+    #     x1[i + 1] = x1[i] + h * f1(x1[i], x2[i], u[i][0])
+    #     x2[i + 1] = x2[i] + h * f2(x1[i], x2[i], u[i][1])
     return x1, x2
