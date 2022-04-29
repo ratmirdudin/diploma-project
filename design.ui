@@ -41,7 +41,7 @@
        <property name="geometry">
         <rect>
          <x>49</x>
-         <y>60</y>
+         <y>10</y>
          <width>36</width>
          <height>112</height>
         </rect>
@@ -64,7 +64,7 @@
        <property name="geometry">
         <rect>
          <x>9</x>
-         <y>110</y>
+         <y>60</y>
          <width>35</width>
          <height>25</height>
         </rect>
@@ -82,7 +82,7 @@
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>60</y>
+         <y>10</y>
          <width>36</width>
          <height>112</height>
         </rect>
@@ -194,7 +194,7 @@
        <property name="geometry">
         <rect>
          <x>89</x>
-         <y>90</y>
+         <y>40</y>
          <width>116</width>
          <height>72</height>
         </rect>
@@ -279,48 +279,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>210</y>
-         <width>149</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <layout class="QFormLayout" name="formLayout_10">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_T">
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>[0, T]=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_T">
-          <property name="maximumSize">
-           <size>
-            <width>74</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>6.2832</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
@@ -483,7 +441,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
@@ -1143,24 +1101,91 @@
         <string>(Разбиение для метода трапеций)</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btn_help">
+      <widget class="QLineEdit" name="lineEdit_t0">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>101</width>
-         <height>31</height>
+         <x>91</x>
+         <y>151</y>
+         <width>41</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>41</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_TLR">
+       <property name="geometry">
+        <rect>
+         <x>79</x>
+         <y>133</y>
+         <width>146</width>
+         <height>54</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>34</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Помощь</string>
+        <string>[        ]</string>
        </property>
       </widget>
+      <widget class="QLabel" name="label_T">
+       <property name="geometry">
+        <rect>
+         <x>6</x>
+         <y>150</y>
+         <width>74</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>[t0, T]=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_T">
+       <property name="geometry">
+        <rect>
+         <x>138</x>
+         <y>151</y>
+         <width>74</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>74</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>6.2832</string>
+       </property>
+      </widget>
+      <zorder>label_TLR</zorder>
       <zorder>label_M</zorder>
       <zorder>label_AL</zorder>
       <zorder>label_A</zorder>
@@ -1179,7 +1204,8 @@
       <zorder>label_N_2</zorder>
       <zorder>label_N_3</zorder>
       <zorder>label_K_desc</zorder>
-      <zorder>btn_help</zorder>
+      <zorder>lineEdit_T</zorder>
+      <zorder>lineEdit_t0</zorder>
      </widget>
     </item>
     <item row="1" column="0">
@@ -1530,6 +1556,24 @@ color: rgb(255, 255, 255);</string>
          </item>
         </layout>
        </widget>
+       <widget class="QPushButton" name="btn_help">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>350</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Помощь</string>
+        </property>
+       </widget>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
@@ -1538,6 +1582,7 @@ color: rgb(255, 255, 255);</string>
        <zorder>btn_cancel_calculate_plot</zorder>
        <zorder>btn_calculate_plot</zorder>
        <zorder>pbar</zorder>
+       <zorder>btn_help</zorder>
       </widget>
       <widget class="QTabWidget" name="tabWidget_plots">
        <property name="geometry">
@@ -1663,6 +1708,36 @@ color: rgb(255, 255, 255);</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>btn_help</tabstop>
+  <tabstop>lineEdit_A00</tabstop>
+  <tabstop>lineEdit_A01</tabstop>
+  <tabstop>lineEdit_A10</tabstop>
+  <tabstop>lineEdit_A11</tabstop>
+  <tabstop>tabWidget_control</tabstop>
+  <tabstop>lineEdit_r</tabstop>
+  <tabstop>lineEdit_a</tabstop>
+  <tabstop>lineEdit_b</tabstop>
+  <tabstop>tabWidget_functional</tabstop>
+  <tabstop>lineEdit_c1</tabstop>
+  <tabstop>lineEdit_c2</tabstop>
+  <tabstop>lineEdit_y1</tabstop>
+  <tabstop>lineEdit_y2</tabstop>
+  <tabstop>lineEdit_T</tabstop>
+  <tabstop>lineEdit_x10</tabstop>
+  <tabstop>lineEdit_x20</tabstop>
+  <tabstop>lineEdit_N</tabstop>
+  <tabstop>lineEdit_K</tabstop>
+  <tabstop>lineEdit_M</tabstop>
+  <tabstop>tabWidget_plots</tabstop>
+  <tabstop>btn_cancel_calculate_plot</tabstop>
+  <tabstop>btn_calculate_plot</tabstop>
+  <tabstop>lineEdit_q1y</tabstop>
+  <tabstop>lineEdit_q2y</tabstop>
+  <tabstop>lineEdit_x1T</tabstop>
+  <tabstop>lineEdit_x2T</tabstop>
+  <tabstop>lineEdit_jmin</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

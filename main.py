@@ -5,7 +5,6 @@ import numpy as np
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import pyqtSignal, QThread, Qt
 from PyQt5.QtGui import QCursor, QDoubleValidator, QIntValidator
-from PyQt5.QtWidgets import QMessageBox, QDialog
 from numpy import double
 from scipy import linalg
 
@@ -77,6 +76,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.lineEdit_x10.setValidator(self.doubleValidator)
         self.lineEdit_x20.setValidator(self.doubleValidator)
 
+        self.lineEdit_t0.setValidator(self.doubleValidator)
         self.lineEdit_T.setValidator(self.doubleValidator)
 
         self.lineEdit_c1.setValidator(self.doubleValidator)
@@ -98,6 +98,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.lineEdit_x10.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_x20.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_T.textChanged[str].connect(lambda: self.on_changed(333, 333))
+        self.lineEdit_t0.textChanged[str].connect(lambda: self.on_changed(333, 333))
 
         self.lineEdit_c1.textChanged[str].connect(lambda: self.on_changed(333, 333))
         self.lineEdit_c2.textChanged[str].connect(lambda: self.on_changed(333, 333))
@@ -139,6 +140,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 self.lineEdit_x10.text(),
                 self.lineEdit_x20.text(),
                 self.lineEdit_T.text(),
+                self.lineEdit_t0.text(),
                 ]
 
         if self.tabWidget_control.currentIndex() == 0:
@@ -193,18 +195,18 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 q_bar = lambda x_T_opt: y_bar - x_T_opt
                 print("Квадратичный")
 
-        sf = None
+        sf_U = None
         u_opt_func = None
         match self.tabWidget_control.currentIndex():
             case 0:
                 r = double(self.lineEdit_r.text())
-                sf = lambda psi: abs(r) * linalg.norm(psi)
+                sf_U = lambda psi: abs(r) * linalg.norm(psi)
                 u_opt_func = lambda psi: psi / linalg.norm(psi)
                 print("Круг/точка")
             case 1:
                 a = double(self.lineEdit_a.text())
                 b = double(self.lineEdit_b.text())
-                sf = lambda psi: abs(a) * abs(psi[0]) + abs(b) * abs(psi[1])  # опорная функция для управления
+                sf_U = lambda psi: abs(a) * abs(psi[0]) + abs(b) * abs(psi[1])  # опорная функция для управления
 
                 def tmp(psi):
                     ui = np.zeros(2)
@@ -226,21 +228,22 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 u_opt_func = lambda psi: tmp(psi)
                 print("Прямоугольник/отрезок")
 
-        if J is None or sf is None:
-            print("Ошибка: J или sf не определена")
+        if J is None or sf_U is None:
+            print("Ошибка: J или sf_U не определена")
             return
 
         params = {
             "N": int(self.lineEdit_N.text()),
             "M": int(self.lineEdit_M.text()),
             "K": int(self.lineEdit_K.text()),
+            "t0": double(self.lineEdit_t0.text()),
             "T": double(self.lineEdit_T.text()),
             "A": A,
             "x0": x0,
             "y_bar": y_bar,
             "c": c,
             "J": J,
-            "sf": sf,
+            "sf_U": sf_U,
             "q_bar": q_bar,
             "u_opt_func": u_opt_func
         }
@@ -279,8 +282,9 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         c = data.get("c")
 
         M = data.get("M")
+        t0 = data.get("t0")
         T = data.get("T")
-        t_g = np.linspace(0, T, M)
+        t_g = np.linspace(t0, T, M)
         u_opt = data.get("u_opt")
 
         self.draw_canvas(x_T, x_T_opt, x, x0, y_bar, c, t_g, u_opt)
@@ -364,12 +368,12 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         N = params.get("N")  # Количество вершин для множества достижимости
         K = params.get("K")  # Разбиение для метода трапеций
         M = params.get("M")  # Численное решение задачи коши
-        t0 = 0
+        t0 = params.get("t0")
         T = params.get("T")
         x0 = params.get("x0")
         A = params.get("A")
         J = params.get("J")
-        sf = params.get("sf")
+        sf_U = params.get("sf_U")
 
         c = params.get("c")
         y_bar = params.get("y_bar")
@@ -383,7 +387,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
         # ---------START---------
         start_time = time.time()
-        x_T = covered_reachability_set(expm, expm_transpose, sf, t0, T, x0, N, K, update_pbar_signal)
+        x_T = covered_reachability_set(expm, expm_transpose, sf_U, t0, T, x0, N, K, update_pbar_signal)
         end_time1 = float('{:.3f}'.format(time.time() - start_time))
 
         start_time = time.time()
@@ -410,10 +414,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         print("3) Время = {} секунд".format(end_time3))
         print("4) Время = {} секунд".format(end_time4))
         print("Общее время = {} секунд".format(end_time))
-        # print("Стартую тестовые вычисления")
-        # start_time = time.time()
-        # test_func(expm_transpose, t0, T, q_bar, x0, A, M)
-        # print("Время тестовых вычислений = {:.3f} секунд".format(time.time() - start_time))
         print("\n\n")
 
         plot_x = np.zeros(N + 1)
@@ -438,7 +438,8 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                               "x0": x0,
                               "N": N,
                               "M": M,
-                              "T": T
+                              "T": T,
+                              "t0": t0
                               })
 
 

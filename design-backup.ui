@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>853</width>
-    <height>776</height>
+    <width>884</width>
+    <height>791</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,8 +25,8 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>829</width>
-        <height>331</height>
+        <width>860</width>
+        <height>337</height>
        </size>
       </property>
       <property name="font">
@@ -35,13 +35,13 @@
        </font>
       </property>
       <property name="title">
-       <string>Задача</string>
+       <string>Параметры</string>
       </property>
       <widget class="QLabel" name="label_AL">
        <property name="geometry">
         <rect>
          <x>49</x>
-         <y>40</y>
+         <y>10</y>
          <width>36</width>
          <height>112</height>
         </rect>
@@ -64,7 +64,7 @@
        <property name="geometry">
         <rect>
          <x>9</x>
-         <y>90</y>
+         <y>60</y>
          <width>35</width>
          <height>25</height>
         </rect>
@@ -82,7 +82,7 @@
        <property name="geometry">
         <rect>
          <x>200</x>
-         <y>40</y>
+         <y>10</y>
          <width>36</width>
          <height>112</height>
         </rect>
@@ -100,8 +100,8 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>20</y>
+         <x>40</x>
+         <y>250</y>
          <width>149</width>
          <height>32</height>
         </rect>
@@ -115,7 +115,7 @@
            </font>
           </property>
           <property name="text">
-           <string>x1(0)=</string>
+           <string>x₁(0)=</string>
           </property>
          </widget>
         </item>
@@ -151,8 +151,8 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>60</y>
+         <x>40</x>
+         <y>290</y>
          <width>149</width>
          <height>32</height>
         </rect>
@@ -166,7 +166,7 @@
            </font>
           </property>
           <property name="text">
-           <string>x2(0)=</string>
+           <string>x₂(0)=</string>
           </property>
          </widget>
         </item>
@@ -194,7 +194,7 @@
        <property name="geometry">
         <rect>
          <x>89</x>
-         <y>70</y>
+         <y>40</y>
          <width>116</width>
          <height>72</height>
         </rect>
@@ -282,53 +282,11 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>460</x>
-         <y>40</y>
-         <width>155</width>
-         <height>32</height>
-        </rect>
-       </property>
-       <layout class="QFormLayout" name="formLayout_10">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_T">
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>[0, T]=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_T">
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>16</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>6.2832</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QLineEdit" name="lineEdit_K">
        <property name="geometry">
         <rect>
-         <x>710</x>
-         <y>240</y>
+         <x>310</x>
+         <y>254</y>
          <width>60</width>
          <height>27</height>
         </rect>
@@ -351,8 +309,8 @@
       <widget class="QLabel" name="label_K">
        <property name="geometry">
         <rect>
-         <x>677</x>
-         <y>240</y>
+         <x>277</x>
+         <y>254</y>
          <width>27</width>
          <height>25</height>
         </rect>
@@ -369,8 +327,8 @@
       <widget class="QLabel" name="label_M">
        <property name="geometry">
         <rect>
-         <x>673</x>
-         <y>204</y>
+         <x>273</x>
+         <y>290</y>
          <width>31</width>
          <height>25</height>
         </rect>
@@ -387,8 +345,8 @@
       <widget class="QLineEdit" name="lineEdit_M">
        <property name="geometry">
         <rect>
-         <x>710</x>
-         <y>204</y>
+         <x>310</x>
+         <y>290</y>
          <width>60</width>
          <height>27</height>
         </rect>
@@ -411,8 +369,8 @@
       <widget class="QLabel" name="label_N">
        <property name="geometry">
         <rect>
-         <x>675</x>
-         <y>170</y>
+         <x>275</x>
+         <y>220</y>
          <width>29</width>
          <height>25</height>
         </rect>
@@ -429,8 +387,8 @@
       <widget class="QLineEdit" name="lineEdit_N">
        <property name="geometry">
         <rect>
-         <x>710</x>
-         <y>170</y>
+         <x>310</x>
+         <y>220</y>
          <width>60</width>
          <height>26</height>
         </rect>
@@ -459,9 +417,9 @@
       <widget class="QGroupBox" name="groupBox_functional">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>160</y>
-         <width>281</width>
+         <x>570</x>
+         <y>30</y>
+         <width>271</width>
          <height>161</height>
         </rect>
        </property>
@@ -473,7 +431,7 @@
          <rect>
           <x>0</x>
           <y>20</y>
-          <width>281</width>
+          <width>271</width>
           <height>141</height>
          </rect>
         </property>
@@ -525,7 +483,7 @@
               </font>
              </property>
              <property name="text">
-              <string>c2=</string>
+              <string>c₂=</string>
              </property>
             </widget>
            </item>
@@ -567,7 +525,7 @@
               </font>
              </property>
              <property name="text">
-              <string>c1=</string>
+              <string>c₁=</string>
              </property>
             </widget>
            </item>
@@ -722,7 +680,7 @@
            <string>2</string>
           </property>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>140</x>
@@ -740,7 +698,7 @@
               </font>
              </property>
              <property name="text">
-              <string>y2=</string>
+              <string>y₂=</string>
              </property>
             </widget>
            </item>
@@ -764,7 +722,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -782,7 +740,7 @@
               </font>
              </property>
              <property name="text">
-              <string>y1=</string>
+              <string>y₁=</string>
              </property>
             </widget>
            </item>
@@ -812,8 +770,8 @@
       <widget class="QGroupBox" name="groupBox_control">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>160</y>
+         <x>240</x>
+         <y>30</y>
          <width>311</width>
          <height>161</height>
         </rect>
@@ -960,13 +918,13 @@
            </font>
           </property>
           <property name="text">
-           <string>U={(u1, u2): |u1|&lt;a, |u2|&lt;b}</string>
+           <string>U={(u₁, u₂): |u₁|&lt;a, |u₂|&lt;b}</string>
           </property>
          </widget>
          <widget class="QWidget" name="layoutWidget_10">
           <property name="geometry">
            <rect>
-            <x>180</x>
+            <x>170</x>
             <y>70</y>
             <width>115</width>
             <height>32</height>
@@ -1008,7 +966,7 @@
          <widget class="QWidget" name="layoutWidget_11">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>20</x>
             <y>70</y>
             <width>114</width>
             <height>32</height>
@@ -1086,47 +1044,193 @@
         </widget>
        </widget>
       </widget>
-      <widget class="QLabel" name="label_A_2">
+      <widget class="QLabel" name="label_N_2">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>20</y>
-         <width>121</width>
-         <height>30</height>
+         <x>380</x>
+         <y>220</y>
+         <width>448</width>
+         <height>24</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>19</pointsize>
+         <family>Agency FB</family>
+         <pointsize>14</pointsize>
         </font>
        </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
        <property name="text">
-        <string>ẋ = Ax + u</string>
+        <string>(Количество вершин для множества достижимости)</string>
        </property>
       </widget>
+      <widget class="QLabel" name="label_N_3">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>290</y>
+         <width>301</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Agency FB</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>(Численное решение задачи коши)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_K_desc">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>254</y>
+         <width>292</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Agency FB</family>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>(Разбиение для метода трапеций)</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_t0">
+       <property name="geometry">
+        <rect>
+         <x>91</x>
+         <y>151</y>
+         <width>41</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>41</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_TLR">
+       <property name="geometry">
+        <rect>
+         <x>79</x>
+         <y>133</y>
+         <width>146</width>
+         <height>54</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>34</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>[        ]</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_T">
+       <property name="geometry">
+        <rect>
+         <x>6</x>
+         <y>150</y>
+         <width>74</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>[t0, T]=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_T">
+       <property name="geometry">
+        <rect>
+         <x>138</x>
+         <y>151</y>
+         <width>74</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>74</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>6.2832</string>
+       </property>
+      </widget>
+      <zorder>label_TLR</zorder>
+      <zorder>label_M</zorder>
+      <zorder>label_AL</zorder>
+      <zorder>label_A</zorder>
+      <zorder>label_AR</zorder>
+      <zorder>layoutWidget</zorder>
+      <zorder>layoutWidget</zorder>
+      <zorder>layoutWidget</zorder>
+      <zorder>layoutWidget</zorder>
+      <zorder>lineEdit_K</zorder>
+      <zorder>label_K</zorder>
+      <zorder>lineEdit_M</zorder>
+      <zorder>label_N</zorder>
+      <zorder>lineEdit_N</zorder>
+      <zorder>groupBox_control</zorder>
+      <zorder>groupBox_functional</zorder>
+      <zorder>label_N_2</zorder>
+      <zorder>label_N_3</zorder>
+      <zorder>label_K_desc</zorder>
+      <zorder>lineEdit_T</zorder>
+      <zorder>lineEdit_t0</zorder>
      </widget>
     </item>
     <item row="1" column="0">
      <widget class="QGroupBox" name="groupBox_solve_and_results">
       <property name="minimumSize">
        <size>
-        <width>829</width>
+        <width>860</width>
         <height>421</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
       <property name="title">
-       <string/>
+       <string>Решение</string>
       </property>
       <widget class="QGroupBox" name="groupBox_3">
        <property name="geometry">
         <rect>
          <x>1</x>
-         <y>11</y>
+         <y>21</y>
          <width>211</width>
-         <height>401</height>
+         <height>391</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -1145,7 +1249,7 @@
         <property name="geometry">
          <rect>
           <x>35</x>
-          <y>20</y>
+          <y>40</y>
           <width>141</width>
           <height>56</height>
          </rect>
@@ -1172,7 +1276,7 @@ color: rgb(255, 255, 255);</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>100</y>
+          <y>160</y>
           <width>181</width>
           <height>23</height>
          </rect>
@@ -1205,7 +1309,7 @@ color: rgb(255, 255, 255);</string>
         <property name="geometry">
          <rect>
           <x>30</x>
-          <y>20</y>
+          <y>40</y>
           <width>151</width>
           <height>56</height>
          </rect>
@@ -1290,7 +1394,7 @@ color: rgb(255, 255, 255);</string>
             </font>
            </property>
            <property name="text">
-            <string>q1#(y)=</string>
+            <string>q₁#(y)=</string>
            </property>
           </widget>
          </item>
@@ -1335,7 +1439,7 @@ color: rgb(255, 255, 255);</string>
             </font>
            </property>
            <property name="text">
-            <string>q2#(y)=</string>
+            <string>q₂#(y)=</string>
            </property>
           </widget>
          </item>
@@ -1377,7 +1481,7 @@ color: rgb(255, 255, 255);</string>
             </font>
            </property>
            <property name="text">
-            <string>x2*(T)=</string>
+            <string>x₂*(T)=</string>
            </property>
           </widget>
          </item>
@@ -1419,7 +1523,7 @@ color: rgb(255, 255, 255);</string>
             </font>
            </property>
            <property name="text">
-            <string>x1*(T)=</string>
+            <string>x₁*(T)=</string>
            </property>
           </widget>
          </item>
@@ -1452,25 +1556,46 @@ color: rgb(255, 255, 255);</string>
          </item>
         </layout>
        </widget>
-       <zorder>splitter</zorder>
-       <zorder>splitter_2</zorder>
+       <widget class="QPushButton" name="btn_help">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>350</y>
+          <width>101</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Помощь</string>
+        </property>
+       </widget>
+       <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget</zorder>
+       <zorder>layoutWidget</zorder>
        <zorder>layoutWidget</zorder>
        <zorder>btn_cancel_calculate_plot</zorder>
        <zorder>btn_calculate_plot</zorder>
        <zorder>pbar</zorder>
+       <zorder>btn_help</zorder>
       </widget>
       <widget class="QTabWidget" name="tabWidget_plots">
        <property name="geometry">
         <rect>
          <x>220</x>
          <y>0</y>
-         <width>601</width>
+         <width>631</width>
          <height>411</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>601</width>
+         <width>606</width>
          <height>411</height>
         </size>
        </property>
@@ -1479,8 +1604,41 @@ color: rgb(255, 255, 255);</string>
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="mouseTracking">
+        <bool>false</bool>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="tabPosition">
+        <enum>QTabWidget::North</enum>
+       </property>
+       <property name="tabShape">
+        <enum>QTabWidget::Rounded</enum>
+       </property>
        <property name="currentIndex">
         <number>0</number>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="elideMode">
+        <enum>Qt::ElideNone</enum>
+       </property>
+       <property name="tabsClosable">
+        <bool>false</bool>
+       </property>
+       <property name="tabBarAutoHide">
+        <bool>false</bool>
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="title">
@@ -1491,7 +1649,7 @@ color: rgb(255, 255, 255);</string>
           <rect>
            <x>9</x>
            <y>10</y>
-           <width>571</width>
+           <width>601</width>
            <height>360</height>
           </rect>
          </property>
@@ -1502,14 +1660,14 @@ color: rgb(255, 255, 255);</string>
        </widget>
        <widget class="QWidget" name="tab_2">
         <attribute name="title">
-         <string>u1(t)</string>
+         <string>u₁(t)</string>
         </attribute>
         <widget class="MplWidget" name="MplWidget_u1" native="true">
          <property name="geometry">
           <rect>
-           <x>30</x>
+           <x>9</x>
            <y>10</y>
-           <width>530</width>
+           <width>601</width>
            <height>360</height>
           </rect>
          </property>
@@ -1520,14 +1678,14 @@ color: rgb(255, 255, 255);</string>
        </widget>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
-         <string>u2(t)</string>
+         <string>u₂(t)</string>
         </attribute>
         <widget class="MplWidget" name="MplWidget_u2" native="true">
          <property name="geometry">
           <rect>
-           <x>30</x>
+           <x>9</x>
            <y>10</y>
-           <width>530</width>
+           <width>601</width>
            <height>360</height>
           </rect>
          </property>
@@ -1550,6 +1708,36 @@ color: rgb(255, 255, 255);</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>btn_help</tabstop>
+  <tabstop>lineEdit_A00</tabstop>
+  <tabstop>lineEdit_A01</tabstop>
+  <tabstop>lineEdit_A10</tabstop>
+  <tabstop>lineEdit_A11</tabstop>
+  <tabstop>tabWidget_control</tabstop>
+  <tabstop>lineEdit_r</tabstop>
+  <tabstop>lineEdit_a</tabstop>
+  <tabstop>lineEdit_b</tabstop>
+  <tabstop>tabWidget_functional</tabstop>
+  <tabstop>lineEdit_c1</tabstop>
+  <tabstop>lineEdit_c2</tabstop>
+  <tabstop>lineEdit_y1</tabstop>
+  <tabstop>lineEdit_y2</tabstop>
+  <tabstop>lineEdit_T</tabstop>
+  <tabstop>lineEdit_x10</tabstop>
+  <tabstop>lineEdit_x20</tabstop>
+  <tabstop>lineEdit_N</tabstop>
+  <tabstop>lineEdit_K</tabstop>
+  <tabstop>lineEdit_M</tabstop>
+  <tabstop>tabWidget_plots</tabstop>
+  <tabstop>btn_cancel_calculate_plot</tabstop>
+  <tabstop>btn_calculate_plot</tabstop>
+  <tabstop>lineEdit_q1y</tabstop>
+  <tabstop>lineEdit_q2y</tabstop>
+  <tabstop>lineEdit_x1T</tabstop>
+  <tabstop>lineEdit_x2T</tabstop>
+  <tabstop>lineEdit_jmin</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
