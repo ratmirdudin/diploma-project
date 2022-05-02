@@ -300,7 +300,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.lineEdit_T.setText(str(params.get("T")))
 
         currentOne = None
-
         r1 = params.get("r1")
         if r1 is not None:
             currentOne = 0
@@ -314,9 +313,19 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             currentOne = 1
             self.lineEdit_initSet_a1.setText(str(a[0]))
             self.lineEdit_initSet_a2.setText(str(a[1]))
-        self.tabWidget_initSet.setCurrentIndex(currentOne)
-        text_solve_M0 = self.tabWidget_initSet.tabText(currentOne)
-        self.label_solve_M0.setText(text_solve_M0)
+        v = params.get("v")
+        if v is not None:
+            currentOne = 2
+            rowCount = len(v[0])
+            self.tableWidget_InitSet.setRowCount(rowCount)
+            for i in range(rowCount):
+                self.tableWidget_InitSet.setItem(i, 0, QTableWidgetItem(str(v[0][i])))
+                self.tableWidget_InitSet.setItem(i, 1, QTableWidgetItem(str(v[1][i])))
+
+        if currentOne is not None:
+            self.tabWidget_initSet.setCurrentIndex(currentOne)
+            text_solve_M0 = self.tabWidget_initSet.tabText(currentOne)
+            self.label_solve_M0.setText(text_solve_M0)
 
         currentTwo = None
         r2 = params.get("r2")
@@ -328,9 +337,10 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             currentTwo = 1
             self.lineEdit_control_b1.setText(str(b[0]))
             self.lineEdit_control_b2.setText(str(b[1]))
-        self.tabWidget_control.setCurrentIndex(currentTwo)
-        text_solve_U = self.tabWidget_control.tabText(currentTwo)
-        self.label_solve_U.setText(text_solve_U)
+        if currentTwo is not None:
+            self.tabWidget_control.setCurrentIndex(currentTwo)
+            text_solve_U = self.tabWidget_control.tabText(currentTwo)
+            self.label_solve_U.setText(text_solve_U)
 
         currentThree = None
         c = params.get("c")
@@ -343,9 +353,10 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             currentThree = 1
             self.lineEdit_functional_y1.setText(str(y_bar[0]))
             self.lineEdit_functional_y2.setText(str(y_bar[1]))
-        self.tabWidget_functional.setCurrentIndex(currentThree)
-        text_solve_J = self.tabWidget_functional.tabText(currentThree)
-        self.label_solve_J.setText(text_solve_J)
+        if currentThree is not None:
+            self.tabWidget_functional.setCurrentIndex(currentThree)
+            text_solve_J = self.tabWidget_functional.tabText(currentThree)
+            self.label_solve_J.setText(text_solve_J)
 
         self.lineEdit_N.setText(str(params.get("N")))
         self.lineEdit_K.setText(str(params.get("K")))
@@ -372,6 +383,18 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             case 1:
                 startParams["a"] = np.array([double(self.lineEdit_initSet_a1.text()),
                                              double(self.lineEdit_initSet_a2.text())])
+            case 2:
+                rowCount = self.tableWidget_InitSet.rowCount()
+                v1 = np.zeros(rowCount)
+                v2 = np.zeros(rowCount)
+                for i in range(rowCount):
+                    widgetItemX = self.tableWidget_InitSet.item(i, 0)
+                    if widgetItemX and widgetItemX.text:
+                        v1[i] = double(widgetItemX.text())
+                    widgetItemY = self.tableWidget_InitSet.item(i, 1)
+                    if widgetItemY and widgetItemY.text:
+                        v2[i] = double(widgetItemY.text())
+                startParams["v"] = np.array([v1, v2])
 
         match self.tabWidget_control.currentIndex():
             case 0:
@@ -725,25 +748,35 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.settingPlots()
         main_MPL = self.MplWidget.canvas
 
-        if x0 is not None:
-            if np.size(x0) == 2:
-                main_MPL.axes.plot(x0[0], x0[1], 'o', label=r'$M_{0}$')
-            else:
-                main_MPL.axes.plot(x0[0], x0[1], label=r'$M_{0}$')
-
-        if y_bar is not None:
-            main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', label=r'$y$')
-        elif c is not None:
-            main_MPL.axes.plot(c[0], c[1], 'o', label=r'$c$')
-
         if x_T is not None:
-            main_MPL.axes.plot(x_T[0], x_T[1], label=r'$x(T)$')
-
-        if x_T_opt is not None:
-            main_MPL.axes.plot(x_T_opt[0], x_T_opt[1], 'ok', label=r'$x_{*}(T)$')
+            main_MPL.axes.plot(x_T[0], x_T[1], color="orange", label=r'$x(T)$', linewidth=2)
 
         if x is not None:
-            main_MPL.axes.plot(x[0], x[1], label=r'$x(t)$')
+            main_MPL.axes.plot(x[0], x[1], color="red", label=r'$x(t)$')
+
+        if y_bar is not None:
+            main_MPL.axes.plot(y_bar[0], y_bar[1], 'o', color="green", label=r'$y$')
+        elif c is not None:
+            maxCoords = [x_T[0][0], x_T[1][0]]
+            maxx = np.array([c[0], c[1]]).dot(np.array([x_T[0][0], x_T[1][0]]))
+            for i in range(1, len(x_T[0])):
+                tmp = np.array([c[0], c[1]]).dot(np.array([x_T[0][i], x_T[1][i]]))
+                if tmp > maxx:
+                    maxx = tmp
+                    maxCoords = [x_T[0][i], x_T[1][i]]
+
+            # main_MPL.axes.quiver( c[0], c[1],maxCoords[0], maxCoords[1], units='xy', color="blue", scale=1)
+            main_MPL.axes.quiver(maxCoords[0], maxCoords[1], 2*c[0], 2*c[1], units='xy', color="green")
+            main_MPL.axes.plot(maxCoords[0], maxCoords[1], color="green", label=r'$\overline{c}$')
+
+        if x0 is not None:
+            if np.size(x0) == 2:
+                main_MPL.axes.plot(x0[0], x0[1], 'o', color="black", label=r'$M_{0}$')
+            else:
+                main_MPL.axes.plot(x0[0], x0[1], color="black", label=r'$M_{0}$')
+
+        if x_T_opt is not None:
+            main_MPL.axes.plot(x_T_opt[0], x_T_opt[1], 'o', color="red")
             main_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
 
         u1_MPL = self.MplWidget_u1.canvas
