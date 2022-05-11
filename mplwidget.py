@@ -35,8 +35,8 @@ class MplWidget(QWidget):
         self.toolbar = MyNavigationToolbar(self.canvas, self)
 
         vertical_layout = QVBoxLayout()
-        vertical_layout.addWidget(self.canvas)
         vertical_layout.addWidget(self.toolbar)
+        vertical_layout.addWidget(self.canvas)
 
         self.canvas.axes = self.canvas.figure.add_subplot(111)
         self.setLayout(vertical_layout)
