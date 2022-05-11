@@ -849,7 +849,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             main_MPL.axes.plot(x_T_opt[0], x_T_opt[1], 'o', color="tab:red", markersize=5)
 
         if x is not None:
-            main_MPL.axes.plot(x[0][0], x[1][0], label=r'$\psi(t)$', color="black")
+            main_MPL.axes.plot(x[0][0], x[1][0], label=r'$\psi(t_0), \psi(T)$', color="black")
             main_MPL.axes.plot(x[0], x[1], label=r'$x_{*}(t)$', color="tab:red")
 
             if optimalTrajectories is not None:
