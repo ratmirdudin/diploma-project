@@ -1,6 +1,4 @@
 import sys
-import time
-from collections import OrderedDict
 
 import matplotlib.patches as mpatches
 import numpy as np
@@ -16,8 +14,8 @@ import help
 from data_executor import save_data, load_data
 from main_calculations import coveredReachabilitySet, optimalControl, \
     minimizeFunctionalForLinearProblem, minimizeQuadraticFunctional, \
-    getTwoDifferentMinimumsInsteadOfFistMinOfFunctional, \
-    directEulerSolve, backEulerSolve, findOptimalCoordsOfM0, optimalControlForAZeroMatrix, unique
+    getTwoDifferentMinimumsInsteadOfFirstMinOfFunctional, \
+    directEulerSolve, backEulerSolve, findOptimalCoordsOfM0, optimalControlForAZeroMatrix
 from utils import isDoublesEqual, sf_polygon, u_opt_quad, u_opt_polygon, isDoubleArraysEqual
 
 
@@ -206,29 +204,24 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.tableWidget_control.setItem(3, 0, QTableWidgetItem("1"))
         self.tableWidget_control.setItem(3, 1, QTableWidgetItem("-1"))
 
-        if self.tableWidget_control.rowCount() > 3:
-            self.btn_control_deleteRow.setEnabled(True)
-        else:
-            self.btn_control_deleteRow.setEnabled(False)
-
         # Пятиугольник управления
         # Заполняем многоугольник управления
-        self.tableWidget_control.setRowCount(5)
-
-        self.tableWidget_control.setItem(0, 0, QTableWidgetItem("-2"))
-        self.tableWidget_control.setItem(0, 1, QTableWidgetItem("3"))
-
-        self.tableWidget_control.setItem(1, 0, QTableWidgetItem("1"))
-        self.tableWidget_control.setItem(1, 1, QTableWidgetItem("3"))
-
-        self.tableWidget_control.setItem(2, 0, QTableWidgetItem("3"))
-        self.tableWidget_control.setItem(2, 1, QTableWidgetItem("-1"))
-
-        self.tableWidget_control.setItem(3, 0, QTableWidgetItem("0"))
-        self.tableWidget_control.setItem(3, 1, QTableWidgetItem("-3"))
-
-        self.tableWidget_control.setItem(4, 0, QTableWidgetItem("-3"))
-        self.tableWidget_control.setItem(4, 1, QTableWidgetItem("-1"))
+        # self.tableWidget_control.setRowCount(5)
+        #
+        # self.tableWidget_control.setItem(0, 0, QTableWidgetItem("-2"))
+        # self.tableWidget_control.setItem(0, 1, QTableWidgetItem("3"))
+        #
+        # self.tableWidget_control.setItem(1, 0, QTableWidgetItem("1"))
+        # self.tableWidget_control.setItem(1, 1, QTableWidgetItem("3"))
+        #
+        # self.tableWidget_control.setItem(2, 0, QTableWidgetItem("3"))
+        # self.tableWidget_control.setItem(2, 1, QTableWidgetItem("-1"))
+        #
+        # self.tableWidget_control.setItem(3, 0, QTableWidgetItem("0"))
+        # self.tableWidget_control.setItem(3, 1, QTableWidgetItem("-3"))
+        #
+        # self.tableWidget_control.setItem(4, 0, QTableWidgetItem("-3"))
+        # self.tableWidget_control.setItem(4, 1, QTableWidgetItem("-1"))
 
         if self.tableWidget_control.rowCount() > 3:
             self.btn_control_deleteRow.setEnabled(True)
@@ -833,13 +826,16 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                     maxCoords = [x_T[0][i], x_T[1][i]]
 
             main_MPL.axes.quiver(maxCoords[0], maxCoords[1], 2 * c[0], 2 * c[1], units='xy', color="tab:orange")
-            main_MPL.axes.plot(maxCoords[0], maxCoords[1], label=r'$c$', color="tab:orange")
+            main_MPL.axes.plot(maxCoords[0], maxCoords[1], label=r'$c$', color="tab:orange", linewidth=3)
 
         if x0 is not None:
             if np.size(x0) == 4:
                 main_MPL.axes.plot(x0[0][0], x0[1][0], 'o', label=r'$M_{0}$', color="tab:blue", markersize=5)
             else:
                 main_MPL.axes.plot(x0[0], x0[1], label=r'$M_{0}$', color="tab:blue")
+
+        # КОСТЫЛЬ******************************************
+        x_T_opt_line = None
 
         if x_T_opt_line is not None:
             main_MPL.axes.plot(x_T_opt_line[0], x_T_opt_line[1],
@@ -848,8 +844,15 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         if x_T_opt is not None and x_T_opt_line is None:
             main_MPL.axes.plot(x_T_opt[0], x_T_opt[1], 'o', color="tab:red", markersize=5)
 
+        # КОСТЫЛЬ 2 ******************************************
+        fillsArea = None
+
         if x is not None:
-            main_MPL.axes.plot(x[0][0], x[1][0], label=r'$\psi(t)$', color="black")
+            if fillsArea is not None:
+                main_MPL.axes.plot(x[0][0], x[1][0], label=r"$\psi(t_0), \psi(T)$", color="black", linewidth=3)
+            else:
+                main_MPL.axes.plot(x[0][0], x[1][0], label=r"$\psi(t_0),$" "\n" + r"$\psi(T)$", color="black",
+                                   linewidth=3)
             main_MPL.axes.plot(x[0], x[1], label=r'$x_{*}(t)$', color="tab:red")
 
             if optimalTrajectories is not None:
@@ -894,17 +897,17 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                         t_g_plot2 = np.append(t_g_plot2, t_g[i])
 
                 if double(self.lineEdit_control_b1.text()) != 0:
-                    u1_MPL.axes.plot(t_g_plot1, u_plot1, color="blue", label=r'$u_{1*}(t)$')
+                    u1_MPL.axes.plot(t_g_plot1, u_plot1, color="blue", label=r'$u_{1*}(t)$', linewidth=2.5)
                     # u1_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
 
                 if double(self.lineEdit_control_b2.text()) != 0:
-                    u2_MPL.axes.plot(t_g_plot2, u_plot2, color="blue", label=r'$u_{2*}(t)$')
+                    u2_MPL.axes.plot(t_g_plot2, u_plot2, color="blue", label=r'$u_{2*}(t)$', linewidth=2.5)
                     # u2_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
             else:
-                u1_MPL.axes.plot(t_g, u_opt[0], color="blue", label=r'$u_{1*}(t)$')
+                u1_MPL.axes.plot(t_g, u_opt[0], color="blue", label=r'$u_{1*}(t)$', linewidth=2.5)
                 # u1_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
 
-                u2_MPL.axes.plot(t_g, u_opt[1], color="blue", label=r'$u_{2*}(t)$')
+                u2_MPL.axes.plot(t_g, u_opt[1], color="blue", label=r'$u_{2*}(t)$', linewidth=2.5)
                 # u2_MPL.axes.legend(loc='upper right', fontsize=10, bbox_to_anchor=(1.1, 1.15), shadow=True)
 
         main_MPL.draw()
@@ -994,9 +997,9 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 # lambd = linalg.norm(x_T_opt - x_T_i[index_one]) / linalg.norm(x_T_opt - x_T_i[index_two])
 
                 alpha_t_array.append(lambda _: 1)
-                alpha_t_array.append(lambda ttt: 1 if (ttt >= T / 4) else 0)
-                alpha_t_array.append(lambda _: 1 / 3)
-                alpha_t_array.append(lambda ttt: np.sin(2.2 * np.pi * ttt / T))
+                # alpha_t_array.append(lambda ttt: 1 if (ttt >= T / 4) else 0)
+                # alpha_t_array.append(lambda _: 1 / 3)
+                # alpha_t_array.append(lambda ttt: np.sin(2.2 * np.pi * ttt / T))
 
                 u_opt_array = []
                 for i in range(len(alpha_t_array)):
@@ -1034,7 +1037,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 # ЛИНЕЙНЫЙ ФУНКЦИОНАЛ
                 # Находим координаты нашего отрезка оптимальных решений
                 if isDoublesEqual(c[0], 0) or isDoublesEqual(c[1], 0):
-                    x_T_opt_line = getTwoDifferentMinimumsInsteadOfFistMinOfFunctional(J, x_T, minJ, x_T_opt)
+                    x_T_opt_line = getTwoDifferentMinimumsInsteadOfFirstMinOfFunctional(J, x_T, minJ, x_T_opt)
                     solutions["x_T_opt_line"] = x_T_opt_line
                 # Пройтись по x0 и найти максимальное скалярное произведение psi_t0 и x0[i] => x0_opt
                 x0_opt = findOptimalCoordsOfM0(psi_t0, x0)
@@ -1086,9 +1089,9 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 alpha_t_array = []
 
                 alpha_t_array.append(lambda _: 1 / (1 + lambd))
-                alpha_t_array.append(lambda ttt: (1 - ttt) if (ttt <= 1) else 0)
-                alpha_t_array.append(lambda ttt: 0 if (ttt <= 3 / 2) else 1)
-                alpha_t_array.append(lambda ttt: abs(ttt - 1) ** 3)
+                # alpha_t_array.append(lambda ttt: (1 - ttt) if (ttt <= 1) else 0)
+                # alpha_t_array.append(lambda ttt: 0 if (ttt <= 3 / 2) else 1)
+                # alpha_t_array.append(lambda ttt: abs(ttt - 1) ** 3)
                 u_opt_array = []
                 for i in range(len(alpha_t_array)):
                     u_opt_func = lambda t: alpha_t_array[i](t) * w[index_one] + (1 - alpha_t_array[i](t)) * w[index_two]

@@ -57,7 +57,7 @@ def coveredReachabilitySet(expm_transpose, sf_M0, sf_U, t0, T, N, K, total_calcs
 
     update_pbar_signal.emit(calculate_percent(progress))
 
-    return unique(x)
+    return x
 
 
 def unique(x):
@@ -115,7 +115,7 @@ def minimizeQuadraticFunctional(J, x, y_bar):
     return J(d), np.array(d), x_opt_one, x_opt_two
 
 
-def getTwoDifferentMinimumsInsteadOfFistMinOfFunctional(J, x, minJ_one, x_opt_one):
+def getTwoDifferentMinimumsInsteadOfFirstMinOfFunctional(J, x, minJ_one, x_opt_one):
     x_opt_two = findSecondDifferentMinimumOfFunctional(J, x, minJ_one, x_opt_one)
 
     if x_opt_two[0] < x_opt_one[0]:
